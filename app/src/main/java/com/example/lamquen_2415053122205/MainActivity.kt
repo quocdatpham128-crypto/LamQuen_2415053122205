@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         val nameInput = binding.etName.text.toString().trim()
         val quantityInput = binding.etQuantity.text.toString().trim()
         binding.tvResult.text = ""
+        binding.tvLabel.text = ""
 
         if (nameInput.isEmpty()) {
             showError("Lỗi: Tên không được để trống!")
@@ -37,6 +38,8 @@ class MainActivity : AppCompatActivity() {
             if (quantity in 1..9) {
                 binding.tvResult.setTextColor(Color.parseColor("#006400"))
                 binding.tvResult.text = "Xin chào $nameInput, số lượng: $quantity"
+                binding.tvLabel.setTextColor(Color.parseColor("#006400"))
+                binding.tvLabel.text = if (quantity < 5) "Ít" else "Nhiều"
             } else {
                 showError("Lỗi: Số lượng phải là số nguyên từ 1 đến 9.")
             }
@@ -49,10 +52,12 @@ class MainActivity : AppCompatActivity() {
         binding.etName.text.clear()
         binding.etQuantity.text.clear()
         binding.tvResult.text = ""
+        binding.tvLabel.text = ""
     }
 
     private fun showError(message: String) {
         binding.tvResult.setTextColor(Color.RED)
         binding.tvResult.text = message
+        binding.tvLabel.text = ""
     }
 }
